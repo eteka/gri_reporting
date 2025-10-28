@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+
+{% block title %}GRI Guidance Center - GRI Reporting Platform{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2><i class="fas fa-compass me-2"></i>GRI Guidance Center</h2>
+        <p class="lead text-muted">Your comprehensive guide to GRI Standards compliance</p>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card sticky-top" style="top: 20px;">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0"><i class="fas fa-list me-2"></i>Quick Navigation</h6>
+                </div>
+                <div class="card-body p-0">
+                    <div class="list-group list-group-flush">
+                        <a href="#gri-overview" class="list-group-item list-group-item-action">GRI Overview</a>
+                        <a href="#reporting-principles" class="list-group-item list-group-item-action">Reporting Principles</a>
+                        <a href="#material-topics" class="list-group-item list-group-item-action">Material Topics</a>
+                        <a href="#stakeholder-engagement" class="list-group-item list-group-item-action">Stakeholder Engagement</a>
+                        <a href="#due-diligence" class="list-group-item list-group-item-action">Due Diligence</a>
+                        <a href="#glossary-section" class="list-group-item list-group-item-action">Interactive Glossary</a>
+                        <a href="#best-practices" class="list-group-item list-group-item-action">Best Practices</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <section id="gri-overview" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-info-circle me-2"></i>Understanding GRI Standards</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center p-3 border rounded">
+                                    <i class="fas fa-foundation fa-2x text-primary mb-2"></i>
+                                    <h6>GRI 1: Foundation</h6>
+                                    <p class="small">Core principles and requirements for sustainability reporting</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center p-3 border rounded">
+                                    <i class="fas fa-building fa-2x text-success mb-2"></i>
+                                    <h6>GRI 2: General Disclosures</h6>
+                                    <p class="small">Organizational context, strategy, governance, and stakeholder engagement</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="text-center p-3 border rounded">
+                                    <i class="fas fa-bullseye fa-2x text-warning mb-2"></i>
+                                    <h6>GRI 3: Material Topics</h6>
+                                    <p class="small">Process for determining material topics and managing impacts</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-lightbulb me-2"></i>
+                            <strong>Pro Tip:</strong> Start with GRI 1 to understand the foundation, then move to GRI 2 for organizational context, and finally GRI 3 for topic-specific reporting.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reporting-principles" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-balance-scale me-2"></i>GRI Reporting Principles</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Principles for Defining Report Content</h6>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('stakeholder')">Stakeholder Inclusiveness</strong>
+                                    <p class="small text-muted">Identify stakeholders and explain how you've responded to their reasonable expectations and interests.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('sustainability context')">Sustainability Context</strong>
+                                    <p class="small text-muted">Present performance in the wider context of sustainability challenges.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong>Materiality</strong>
+                                    <p class="small text-muted">Cover topics that reflect significant economic, environmental, and social impacts.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('completeness')">Completeness</strong>
+                                    <p class="small text-muted">Include all information necessary for stakeholders to assess performance.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Principles for Defining Report Quality</h6>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('accuracy')">Accuracy</strong>
+                                    <p class="small text-muted">Information must be sufficiently accurate and detailed for assessment.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('balance')">Balance</strong>
+                                    <p class="small text-muted">Reflect positive and negative aspects of performance fairly.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('clarity')">Clarity</strong>
+                                    <p class="small text-muted">Make information understandable and accessible to stakeholders.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('comparability')">Comparability</strong>
+                                    <p class="small text-muted">Enable comparison over time and with other organizations.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('timeliness')">Timeliness</strong>
+                                    <p class="small text-muted">Report on a regular schedule so information is available when needed.</p>
+                                </div>
+                                <div class="mb-3">
+                                    <strong class="glossary-term" onclick="showGlossaryTerm('verifiability')">Verifiability</strong>
+                                    <p class="small text-muted">Gather and record information so it can be examined for quality.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="material-topics" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-bullseye me-2"></i>Understanding Material Topics</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-success">
+                            <i class="fas fa-question-circle me-2"></i>
+                            <strong>What are <span class="glossary-term" onclick="showGlossaryTerm('material topic')">Material Topics</span>?</strong>
+                            <p class="mb-0 mt-2">Topics that represent your organization's most significant impacts on the economy, environment, and people, including human rights.</p>
+                        </div>
+                        
+                        <h6>Step-by-Step Process:</h6>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100 border-primary">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-search fa-2x text-primary mb-2"></i>
+                                        <h6>1. Understand Context</h6>
+                                        <p class="small">Map your activities, business relationships, and stakeholders</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100 border-warning">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-impact fa-2x text-warning mb-2"></i>
+                                        <h6>2. Identify Impacts</h6>
+                                        <p class="small">Identify actual and potential positive and negative impacts</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card h-100 border-success">
+                                    <div class="card-body text-center">
+                                        <i class="fas fa-sort-amount-down fa-2x text-success mb-2"></i>
+                                        <h6>3. Prioritize</h6>
+                                        <p class="small">Assess significance and prioritize most important impacts</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stakeholder-engagement" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-users me-2"></i>Stakeholder Engagement Guide</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Key Stakeholder Groups</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-user-tie text-primary me-2"></i>Employees
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-handshake text-success me-2"></i>Customers
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-truck text-warning me-2"></i>Suppliers
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-home text-info me-2"></i>Communities
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-chart-line text-danger me-2"></i>Investors
+                                    </li>
+                                    <li class="list-group-item d-flex align-items-center">
+                                        <i class="fas fa-university text-secondary me-2"></i>Government
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Engagement Methods</h6>
+                                <div class="mb-2">
+                                    <span class="badge bg-primary me-1">Surveys</span>
+                                    <span class="badge bg-success me-1">Interviews</span>
+                                    <span class="badge bg-warning me-1">Focus Groups</span>
+                                </div>
+                                <div class="mb-2">
+                                    <span class="badge bg-info me-1">Workshops</span>
+                                    <span class="badge bg-danger me-1">Advisory Panels</span>
+                                    <span class="badge bg-secondary me-1">Online Platforms</span>
+                                </div>
+                                <div class="alert alert-light mt-3">
+                                    <small><i class="fas fa-info-circle me-1"></i>Document your engagement process and how stakeholder input influenced your material topics selection.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="due-diligence" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-shield-alt me-2"></i>Due Diligence Process</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong class="glossary-term" onclick="showGlossaryTerm('due diligence')">Due Diligence</strong> is the process to identify, prevent, mitigate, and account for how you address actual and potential negative impacts.
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Key Steps</h6>
+                                <ol>
+                                    <li class="mb-2"><strong>Embed</strong> responsible business conduct into policies and management systems</li>
+                                    <li class="mb-2"><strong>Identify</strong> and assess actual and potential adverse impacts</li>
+                                    <li class="mb-2"><strong>Cease, prevent, or mitigate</strong> adverse impacts</li>
+                                    <li class="mb-2"><strong>Track</strong> implementation and results</li>
+                                    <li class="mb-2"><strong>Communicate</strong> how impacts are addressed</li>
+                                    <li class="mb-2"><strong>Provide or cooperate</strong> in remediation when appropriate</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6><i class="fas fa-lightbulb me-2"></i>Implementation Tips</h6>
+                                        <ul class="small">
+                                            <li>Start with high-risk areas and activities</li>
+                                            <li>Involve relevant stakeholders in the process</li>
+                                            <li>Use existing risk management systems where possible</li>
+                                            <li>Document decisions and actions taken</li>
+                                            <li>Review and update regularly</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="glossary-section" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-book me-2"></i>Interactive GRI Glossary</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <input type="text" class="form-control" id="glossarySearch" placeholder="Search for a GRI term...">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <button class="btn btn-outline-primary" onclick="showRandomTerm()">
+                                    <i class="fas fa-random me-2"></i>Random Term
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="glossaryResults" class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 glossary-card" onclick="showGlossaryTerm('impact')">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-primary">Impact</h6>
+                                        <p class="card-text small">The effect an organization has on the economy, environment, and people...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 glossary-card" onclick="showGlossaryTerm('material topic')">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-primary">Material Topic</h6>
+                                        <p class="card-text small">Topics representing the most significant impacts on economy, environment, and people...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 glossary-card" onclick="showGlossaryTerm('stakeholder')">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-primary">Stakeholder</h6>
+                                        <p class="card-text small">Individuals or groups with interests affected by the organization's activities...</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card h-100 glossary-card" onclick="showGlossaryTerm('due diligence')">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-primary">Due Diligence</h6>
+                                        <p class="card-text small">Process to identify, prevent, mitigate, and account for impacts...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="best-practices" class="mb-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-star me-2"></i>Best Practices & Tips</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-check-circle text-success me-2"></i>Do's</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Start early and plan your reporting timeline</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Engage stakeholders throughout the process</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use data management systems for consistency</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Seek external assurance for credibility</li>
+                                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Make reports accessible and user-friendly</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6><i class="fas fa-times-circle text-danger me-2"></i>Don'ts</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Don't cherry-pick only positive information</li>
+                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Don't ignore stakeholder concerns</li>
+                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Don't report without proper data verification</li>
+                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Don't use technical jargon without explanation</li>
+                                    <li class="mb-2"><i class="fas fa-times text-danger me-2"></i>Don't delay addressing identified issues</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-3">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Remember:</strong> GRI reporting is not just about compliance—it's about driving meaningful change and demonstrating your commitment to sustainable development.
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<style>
+.glossary-card {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.glossary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Enhanced glossary search functionality
+document.getElementById('glossarySearch').addEventListener('input', function(e) {
+    const searchTerm = e.target.value.toLowerCase();
+    const glossaryCards = document.querySelectorAll('.glossary-card');
+    
+    glossaryCards.forEach(card => {
+        const title = card.querySelector('.card-title').textContent.toLowerCase();
+        const text = card.querySelector('.card-text').textContent.toLowerCase();
+        
+        if (title.includes(searchTerm) || text.includes(searchTerm)) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = searchTerm === '' ? 'block' : 'none';
+        }
+    });
+});
+
+function showRandomTerm() {
+    const terms = ['impact', 'material topic', 'stakeholder', 'due diligence', 'accuracy', 'balance', 'clarity'];
+    const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+    showGlossaryTerm(randomTerm);
+}
+
+// Smooth scrolling for navigation
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

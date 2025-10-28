@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Organization Setup - GRI Reporting Platform{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-building me-2"></i>Organization Setup
+                    </h3>
+                    <p class="mb-0 mt-2">GRI 2-1: Organizational Details</p>
+                </div>
+                <div class="card-body">
+                    {% include 'components/gri_help_card.html' %}
+                    <form id="organizationForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="legalName" class="form-label">Legal Name *</label>
+                                <input type="text" class="form-control" id="legalName" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="businessName" class="form-label">Trade/Business Name</label>
+                                <input type="text" class="form-control" id="businessName">
+                                <div class="form-text">If different from legal name</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="ownershipType" class="form-label">Ownership Type *</label>
+                                <select class="form-select" id="ownershipType" required>
+                                    <option value="">Select ownership type</option>
+                                    <option value="public">Public Company</option>
+                                    <option value="private">Private Company</option>
+                                    <option value="ngo">Non-Governmental Organization</option>
+                                    <option value="government">Government Entity</option>
+                                    <option value="cooperative">Cooperative</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="legalForm" class="form-label">Legal Form *</label>
+                                <input type="text" class="form-control" id="legalForm" required>
+                                <div class="form-text">e.g., Ltd, PLC, Inc, LLC</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="headquarters" class="form-label">Headquarters Location *</label>
+                                <input type="text" class="form-control" id="headquarters" required>
+                                <div class="form-text">City, Country</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="countries" class="form-label">Countries of Operation</label>
+                                <textarea class="form-control" id="countries" rows="2"></textarea>
+                                <div class="form-text">Comma-separated list</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="industry" class="form-label">Primary Industry</label>
+                                <input type="text" class="form-control" id="industry">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="employees" class="form-label">Number of Employees</label>
+                                <select class="form-select" id="employees">
+                                    <option value="">Select range</option>
+                                    <option value="1-10">1-10</option>
+                                    <option value="11-50">11-50</option>
+                                    <option value="51-200">51-200</option>
+                                    <option value="201-500">201-500</option>
+                                    <option value="501-1000">501-1000</option>
+                                    <option value="1000+">1000+</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Organization Description</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                            <div class="form-text">Brief description of your organization's activities and purpose</div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="website" class="form-label">Website</label>
+                            <input type="url" class="form-control" id="website">
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>GRI 2-1 Guidance:</strong> This information fulfills the organizational details disclosure requirement. 
+                            It will be used across all your sustainability reports and can be updated anytime.
+                        </div>
+
+                        <div class="card bg-light mt-3">
+                            <div class="card-body">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Quick Tips</h6>
+                                <ul class="small mb-0">
+                                    <li>Ensure legal name matches official registration documents</li>
+                                    <li>Include all significant operational locations</li>
+                                    <li>Be specific about your <span class="glossary-term" onclick="showGlossaryTerm('stakeholder')">stakeholder</span> groups</li>
+                                    <li>This forms the foundation for your <span class="glossary-term" onclick="showGlossaryTerm('material topic')">material topics</span> assessment</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('index') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Home
+                            </a>
+                            <button type="submit" class="btn btn-gri">
+                                <i class="fas fa-save me-2"></i>Save Organization Details
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('organizationForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        legal_name: document.getElementById('legalName').value,
+        business_name: document.getElementById('businessName').value,
+        ownership_type: document.getElementById('ownershipType').value,
+        legal_form: document.getElementById('legalForm').value,
+        headquarters_location: document.getElementById('headquarters').value,
+        countries_of_operation: document.getElementById('countries').value,
+        industry: document.getElementById('industry').value,
+        employees: document.getElementById('employees').value,
+        description: document.getElementById('description').value,
+        website: document.getElementById('website').value
+    };
+    
+    fetch('/api/save-organization', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Organization details saved successfully!');
+            window.location.href = '/dashboard';
+        } else {
+            alert('Error saving organization details');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error saving organization details');
+    });
+});
+
+// Load existing organization data
+fetch('/api/get-organization')
+    .then(response => response.json())
+    .then(data => {
+        if (data.legal_name) {
+            document.getElementById('legalName').value = data.legal_name || '';
+            document.getElementById('businessName').value = data.business_name || '';
+            document.getElementById('ownershipType').value = data.ownership_type || '';
+            document.getElementById('legalForm').value = data.legal_form || '';
+            document.getElementById('headquarters').value = data.headquarters_location || '';
+            document.getElementById('countries').value = data.countries_of_operation || '';
+            document.getElementById('industry').value = data.industry || '';
+            document.getElementById('employees').value = data.employees || '';
+            document.getElementById('description').value = data.description || '';
+            document.getElementById('website').value = data.website || '';
+        }
+    })
+    .catch(error => console.error('Error loading organization data:', error));
+</script>
+{% endblock %}

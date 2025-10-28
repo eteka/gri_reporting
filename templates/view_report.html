@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}{{ report.title }} - GRI Reporting Platform{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>{{ report.title }}</h2>
+            <p class="text-muted mb-0">{{ report.reporting_period }} | Created: {{ report.created_at[:10] }}</p>
+        </div>
+        <div>
+            {% if report.status == 'completed' %}
+            <span class="badge bg-success fs-6 me-2">Completed</span>
+            {% else %}
+            <span class="badge bg-warning fs-6 me-2">Draft</span>
+            {% endif %}
+            <button class="btn btn-outline-primary" onclick="window.print()">
+                <i class="fas fa-print me-2"></i>Print Report
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Report Overview</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Report Type:</strong> {{ report.report_type|title }}</p>
+                            <p><strong>GRI Application:</strong> {{ report.gri_option|title }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Status:</strong> {{ report.status|title }}</p>
+                            <p><strong>Last Updated:</strong> {{ report.created_at[:10] }}</p>
+                        </div>
+                    </div>
+                    {% if report.description %}
+                    <p><strong>Description:</strong></p>
+                    <p>{{ report.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if report.material_topics %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bullseye me-2"></i>Material Topics
+                        <span class="glossary-term ms-2" onclick="showGlossaryTerm('material topic')">(Learn
+                            more)</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for topic in report.material_topics %}
+                        <div class="col-md-6 mb-2">
+                            <i class="fas fa-check text-success me-2"></i>{{ topic }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-list-check me-2"></i>GRI Standards Compliance Checklist</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>GRI 1: Foundation</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri1-1" checked disabled>
+                                <label class="form-check-label" for="gri1-1">Reporting principles applied</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri1-2">
+                                <label class="form-check-label" for="gri1-2">
+                                    <span class="glossary-term" onclick="showGlossaryTerm('due diligence')">Due
+                                        diligence</span> process documented
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri1-3">
+                                <label class="form-check-label" for="gri1-3">Material topics identified</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>GRI 2: General Disclosures</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri2-1">
+                                <label class="form-check-label" for="gri2-1">Organizational details (2-1)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri2-2">
+                                <label class="form-check-label" for="gri2-2">
+                                    <span class="glossary-term"
+                                        onclick="showGlossaryTerm('stakeholder')">Stakeholder</span> engagement (2-29)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gri2-3">
+                                <label class="form-check-label" for="gri2-3">Governance structure (2-9)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Report Sections</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="reportSections">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne">
+                                    1. Organizational Profile
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show"
+                                data-bs-parent="#reportSections">
+                                <div class="accordion-body">
+                                    <p>Complete your organizational profile including:</p>
+                                    <ul>
+                                        <li>Legal name and ownership structure</li>
+                                        <li>Headquarters and operational locations</li>
+                                        <li>Products, services, and markets</li>
+                                        <li>Scale of operations</li>
+                                    </ul>
+                                    <a href="{{ url_for('organization_setup') }}"
+                                        class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-edit me-1"></i>Edit Organization Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo">
+                                    2. Strategy and Governance
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#reportSections">
+                                <div class="accordion-body">
+                                    <p>Document your sustainability strategy and governance:</p>
+                                    <ul>
+                                        <li>Leadership statement</li>
+                                        <li>Governance structure</li>
+                                        <li>Risk management</li>
+                                        <li>Ethics and integrity</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-secondary" disabled>
+                                        <i class="fas fa-plus me-1"></i>Add Content (Coming Soon)
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree">
+                                    3. Material Topics Disclosures
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse"
+                                data-bs-parent="#reportSections">
+                                <div class="accordion-body">
+                                    <p>Detailed disclosures for each material topic:</p>
+                                    {% if report.material_topics %}
+                                    {% for topic in report.material_topics %}
+                                    <div class="border rounded p-2 mb-2">
+                                        <strong>{{ topic }}</strong>
+                                        <div class="mt-1">
+                                            <small class="text-muted">Management approach and performance data
+                                                required</small>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <p class="text-muted">No material topics selected yet.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card mb-4 guidance-sidebar">
+                <div class="card-header bg-primary text-white">
+                    <h6 class="mb-0"><i class="fas fa-tasks me-2"></i>Progress Tracker</h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Overall Progress</span>
+                            <span>25%</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-indicator" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <small class="text-muted">
+                        Complete all sections to finalize your report and ensure GRI compliance.
+                    </small>
+
+                    <div class="mt-3">
+                        <h6 class="small"><i class="fas fa-compass me-1"></i>Need Help?</h6>
+                        <a href="{{ url_for('guidance') }}" class="btn btn-sm btn-outline-primary w-100"
+                            target="_blank">
+                            <i class="fas fa-external-link-alt me-1"></i>Open GRI Guidance
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-book me-2"></i>GRI Quick Reference</h6>
+                </div>
+                <div class="card-body">
+                    <h6 class="small text-muted mb-2">Reporting Principles:</h6>
+                    <div class="mb-2">
+                        <span class="glossary-term" onclick="showGlossaryTerm('accuracy')">Accuracy</span> |
+                        <span class="glossary-term" onclick="showGlossaryTerm('balance')">Balance</span> |
+                        <span class="glossary-term" onclick="showGlossaryTerm('clarity')">Clarity</span>
+                    </div>div>
+                    <spass="mb-3">
+                        <span class="glossary-term" onclick="showGlossaryTerm('comparability')">Comparability</span> |
+                        <span class="glossary-term" onclick="showGlossaryTerm('completeness')">Completeness</span>
+                </div>
+                <div class="mb-3">
+                    <span class="glossary-term" onclick="showGlossaryTerm('timeliness')">Timeliness</span> |
+                    <span class="glossary-term" onclick="showGlossaryTerm('verifiability')">Verifiability</span>
+                </div>
+
+                <div class="alert alert-light p-2">
+                    <small>
+                        <i class="fas fa-info-circle me-1"></i>
+                        Click any term above for detailed explanations from the GRI glossary.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-download me-2"></i>Export Options</h6>
+            </div>
+            <div class="card-body">
+                <button class="btn btn-outline-primary btn-sm w-100 mb-2" disabled>
+                    <i class="fas fa-file-pdf me-2"></i>Export as PDF
+                </button>
+                <button class="btn btn-outline-secondary btn-sm w-100 mb-2" disabled>
+                    <i class="fas fa-file-excel me-2"></i>Export Data to Excel
+                </button>
+                <button class="btn btn-outline-info btn-sm w-100" disabled>
+                    <i class="fas fa-code me-2"></i>Export as JSON
+                </button>
+                <small class="text-muted d-block mt-2">Export features available when report is completed</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary me-2">
+        <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+    </a>
+    <button class="btn btn-gri" onclick="markComplete()">
+        <i class="fas fa-check me-2"></i>Mark as Complete
+    </button>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function markComplete() {
+        if (confirm('Are you sure you want to mark this report as complete? This will finalize the report.')) {
+            alert('Report marked as complete! (This would update the status in a full implementation)');
+        }
+    }
+</script>
+{% endblock %}

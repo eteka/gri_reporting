@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block title %}New Report - GRI Reporting Platform{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus me-2"></i>Create New Sustainability Report
+                    </h3>
+                    <p class="mb-0 mt-2">GRI Standards Compliant Reporting</p>
+                </div>
+                <div class="card-body">
+                    {% include 'components/gri_help_card.html' %}
+                    <form id="reportForm">
+                        <div class="row">
+                            <div class="col-md-8 mb-3">
+                                <label for="title" class="form-label">Report Title *</label>
+                                <input type="text" class="form-control" id="title" required>
+                                <div class="form-text">e.g., "2024 Sustainability Report"</div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="reportingPeriod" class="form-label">Reporting Period *</label>
+                                <select class="form-select" id="reportingPeriod" required>
+                                    <option value="">Select period</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="Q4 2024">Q4 2024</option>
+                                    <option value="Q3 2024">Q3 2024</option>
+                                    <option value="Custom">Custom Period</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Report Description</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                            <div class="form-text">Brief overview of this report's scope and objectives</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="reportType" class="form-label">Report Type *</label>
+                                <select class="form-select" id="reportType" required>
+                                    <option value="">Select type</option>
+                                    <option value="comprehensive">Comprehensive Report</option>
+                                    <option value="core">Core Report</option>
+                                    <option value="sector-specific">Sector-Specific</option>
+                                    <option value="integrated">Integrated Report</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="griOption" class="form-label">GRI Standards Application *</label>
+                                <select class="form-select" id="griOption" required>
+                                    <option value="">Select option</option>
+                                    <option value="in-accordance">In accordance with GRI Standards</option>
+                                    <option value="gri-referenced">GRI Standards referenced</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-bullseye me-2"></i>Material Topics Selection
+                                    <span class="glossary-term ms-2" onclick="showGlossaryTerm('material topic')">(What are material topics?)</span>
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="alert alert-light border-primary">
+                                    <i class="fas fa-info-circle text-primary me-2"></i>
+                                    <strong>Guidance:</strong> Select topics that represent your organization's most significant impacts on the economy, environment, and people. Consider your <span class="glossary-term" onclick="showGlossaryTerm('stakeholder')">stakeholders'</span> concerns and your <span class="glossary-term" onclick="showGlossaryTerm('due diligence')">due diligence</span> findings.
+                                </div>
+                                <p class="text-muted mb-3">Choose the material topics most relevant to your organization:</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <h6>Economic Topics</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="economic-performance">
+                                            <label class="form-check-label" for="economic-performance">Economic Performance</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="market-presence">
+                                            <label class="form-check-label" for="market-presence">Market Presence</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="procurement">
+                                            <label class="form-check-label" for="procurement">Procurement Practices</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>Environmental Topics</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="energy">
+                                            <label class="form-check-label" for="energy">Energy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="water">
+                                            <label class="form-check-label" for="water">Water and Effluents</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="emissions">
+                                            <label class="form-check-label" for="emissions">Emissions</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="waste">
+                                            <label class="form-check-label" for="waste">Waste</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>Social Topics</h6>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="employment">
+                                            <label class="form-check-label" for="employment">Employment</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="training">
+                                            <label class="form-check-label" for="training">Training and Education</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="diversity">
+                                            <label class="form-check-label" for="diversity">Diversity and Equal Opportunity</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="health-safety">
+                                            <label class="form-check-label" for="health-safety">Occupational Health and Safety</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <strong>Next Steps:</strong> After creating your report, you'll be guided through each section 
+                            including <span class="glossary-term" onclick="showGlossaryTerm('stakeholder')">stakeholder</span> engagement, 
+                            <span class="glossary-term" onclick="showGlossaryTerm('due diligence')">due diligence</span> processes, 
+                            and detailed disclosures for each selected material topic.
+                        </div>
+
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6><i class="fas fa-compass me-2"></i>Need Guidance?</h6>
+                                        <p class="small mb-2">Not sure about material topics or GRI requirements?</p>
+                                        <a href="{{ url_for('guidance') }}" class="btn btn-sm btn-outline-primary" target="_blank">
+                                            <i class="fas fa-external-link-alt me-1"></i>Open GRI Guidance
+                                        </a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6><i class="fas fa-lightbulb me-2"></i>Pro Tip</h6>
+                                        <p class="small mb-2">Start with 3-5 material topics for your first report. You can always add more later.</p>
+                                        <small class="text-muted">Click any <span class="glossary-term" onclick="showGlossaryTerm('material topic')">underlined term</span> for definitions</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+                            </a>
+                            <button type="submit" class="btn btn-gri">
+                                <i class="fas fa-save me-2"></i>Create Report
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('reportForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect material topics
+    const materialTopics = [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    checkboxes.forEach(checkbox => {
+        materialTopics.push(checkbox.nextElementSibling.textContent);
+    });
+    
+    const formData = {
+        title: document.getElementById('title').value,
+        reporting_period: document.getElementById('reportingPeriod').value,
+        description: document.getElementById('description').value,
+        report_type: document.getElementById('reportType').value,
+        gri_option: document.getElementById('griOption').value,
+        material_topics: materialTopics,
+        status: 'draft'
+    };
+    
+    fetch('/api/save-report', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Report created successfully!');
+            window.location.href = `/report/${data.report_id}`;
+        } else {
+            alert('Error creating report');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error creating report');
+    });
+});
+</script>
+{% endblock %}

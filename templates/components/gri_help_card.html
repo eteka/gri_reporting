@@ -1,0 +1,50 @@
+<!-- GRI Help Card Component -->
+<div class="card border-info mb-3" id="griHelpCard">
+    <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+        <h6 class="mb-0">
+            <i class="fas fa-info-circle me-2"></i>GRI Quick Help
+        </h6>
+        <button class="btn btn-sm btn-outline-light" onclick="toggleHelpCard()">
+            <i class="fas fa-chevron-up" id="helpCardIcon"></i>
+        </button>
+    </div>
+    <div class="card-body" id="helpCardBody">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="small text-muted">Key Concepts:</h6>
+                <div class="mb-2">
+                    <span class="glossary-term" onclick="showGlossaryTerm('material topic')">Material Topics</span> |
+                    <span class="glossary-term" onclick="showGlossaryTerm('stakeholder')">Stakeholders</span>
+                </div>
+                <div class="mb-2">
+                    <span class="glossary-term" onclick="showGlossaryTerm('due diligence')">Due Diligence</span> |
+                    <span class="glossary-term" onclick="showGlossaryTerm('impact')">Impact</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6 class="small text-muted">Need More Help?</h6>
+                <a href="{{ url_for('guidance') }}" class="btn btn-sm btn-outline-primary me-2" target="_blank">
+                    <i class="fas fa-external-link-alt me-1"></i>Full Guide
+                </a>
+                <button class="btn btn-sm btn-outline-secondary" onclick="showRandomTip()">
+                    <i class="fas fa-lightbulb me-1"></i>Random Tip
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleHelpCard() {
+    const body = document.getElementById('helpCardBody');
+    const icon = document.getElementById('helpCardIcon');
+    
+    if (body.style.display === 'none') {
+        body.style.display = 'block';
+        icon.className = 'fas fa-chevron-up';
+    } else {
+        body.style.display = 'none';
+        icon.className = 'fas fa-chevron-down';
+    }
+}
+</script>
